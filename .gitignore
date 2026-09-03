@@ -1,0 +1,15 @@
+# 가상환경과 캐시는 어느 폴더에 있든 올리지 않는다
+.venv/
+__pycache__/
+
+# 데이터셋 폴더는 폴더만 올리고 내용물은 올리지 않는다
+training/shots/*
+training/dataset/*
+training/clean/*
+!training/shots/.gitkeep
+!training/dataset/.gitkeep
+!training/clean/.gitkeep
+
+# 빌드 산출물
+app/build/
+app/dist/
