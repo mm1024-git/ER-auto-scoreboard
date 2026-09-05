@@ -13,3 +13,5 @@ training/clean/*
 # 빌드 산출물
 app/build/
 app/dist/
+
+data/*

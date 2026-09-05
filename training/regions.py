@@ -38,7 +38,7 @@ def _why_not(text: str) -> str:
         return f"미판별 글자 {unknown_count}개 포함"
     found = SCORE_NUMBER.findall(text)
     if len(found) < 2:
-        return f"0.5 단위 수가 {len(found)}개뿐이다 (두 개여야 한다)"
+        return f"0.5 단위 수가 {len(found)}개입니다 (두 개여야 합니다)"
     return f"추출된 수: {found[-2]}, {found[-1]}"
 
 
@@ -57,9 +57,9 @@ def _more_useful(text: str, best: str) -> bool:
 
 class RegionEditor:
     HELP = (
-        "게임 화면 지정을 누른 뒤 게임 화면 전체를 한 번 드래그하고, 그다음 팀마다 "
-        "점수 글자에 맞춰 상자를 그려라. 옵저빙으로 올라간 칸은 올라간 자리에 그대로 "
-        "지정합니다. 실선이 내려온 위치, 점선이 올라간 위치입니다."
+        "게임 화면 지정을 누른 뒤 게임 화면 전체를 한 번 드래그하고, 팀마다 점수 글자에 "
+        "맞춰 상자를 지정합니다. 옵저빙으로 올라간 칸은 올라간 위치에 그대로 지정합니다. "
+        "실선이 내려온 위치, 점선이 올라간 위치입니다."
     )
 
     def __init__(self, frame: np.ndarray, cfg: Config, config_path: str, reader):
@@ -243,7 +243,7 @@ class RegionEditor:
             for line in trace:  # what the aggregator path actually saw
                 print(f"  {slot + 1}번 칸 {place_name} 집계 경로 {line}")
             # Show how far the reading got: a "?" marks a glyph that needs a
-                # label, an empty result means the box holds no glyph.
+            # label, an empty result means the box holds no glyph.
             mask, gray = ink(crop, self.cfg.threshold), to_gray(crop)
             for a, b in line_spans(mask):
                 glyph_trace: list[str] = []
@@ -302,7 +302,7 @@ class RegionEditor:
         lift_note = (
             "상승 폭이 아직 측정되지 않았습니다. 옵저빙으로 올라간 칸을 해당 위치에 지정한 뒤 저장하면 측정됩니다."
             if self.cfg.raise_ratio <= 0
-            else f"올라가는 양은 상자 높이의 {self.cfg.raise_ratio:.2f}배."
+            else f"상승 폭은 상자 높이의 {self.cfg.raise_ratio:.2f}배입니다."
         )
         if self.reader is None:
             read_note = "학습된 모델이 없어 판독 미리보기를 사용할 수 없습니다."
@@ -339,8 +339,8 @@ class RegionEditor:
         self.cfg.save(self.config_path)
         self.redraw()
         self.status.config(
-            text=f"{len(self.cfg.slots)}칸을 {self.config_path}에 저장했다. "
-            f"올라가는 양은 상자 높이의 {self.cfg.raise_ratio:.2f}배."
+            text=f"{len(self.cfg.slots)}칸을 {self.config_path}에 저장했습니다. "
+            f"상승 폭은 상자 높이의 {self.cfg.raise_ratio:.2f}배입니다."
         )
 
     def run(self) -> None:
